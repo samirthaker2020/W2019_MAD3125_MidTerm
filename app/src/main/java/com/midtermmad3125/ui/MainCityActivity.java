@@ -15,7 +15,7 @@ public class MainCityActivity extends AppCompatActivity
     private TextView cityname;
     private TextView citynlat;
     private TextView citylon;
-    private TextView citycode;
+    private TextView country;
     private TextView citypopulation;
 
     @Override
@@ -27,7 +27,7 @@ public class MainCityActivity extends AppCompatActivity
         cityname = findViewById(R.id.cityname);
         citynlat = findViewById(R.id.latitiude);
         citylon = findViewById(R.id.logitude);
-       // citycode = findViewById(R.id.citycodelbl);
+        country = findViewById(R.id.citycode);
         citypopulation = findViewById(R.id.population);
 
 getJsonData();
@@ -45,7 +45,7 @@ getJsonData();
             citylon.setText("Longitude: "+cityCoordObject.getString("lon"));
             citynlat.setText("Latitude: "+cityCoordObject.getString("lat"));
 
-            citycode.setText("Country: "+cityObject.getString("country"));
+            country.setText("Country: "+cityObject.getString("country"));
             citypopulation.setText("population: "+cityObject.getString("population"));
         }catch(Exception e){
             e.printStackTrace();
