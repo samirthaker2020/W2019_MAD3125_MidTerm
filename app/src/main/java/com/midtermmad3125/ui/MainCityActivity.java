@@ -12,8 +12,11 @@ import org.json.JSONObject;
 
 public class MainCityActivity extends AppCompatActivity
 {
-private TextView cityname,lati,longi,population;
-
+    private TextView cityname;
+    private TextView citynlat;
+    private TextView citylon;
+    private TextView citycode;
+    private TextView citypopulation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,14 +24,16 @@ private TextView cityname,lati,longi,population;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        cityname=findViewById(R.id.cityname);
-        lati=findViewById(R.id.latitiude);
-        longi=findViewById(R.id.logitude);
-        population=findViewById(R.id.population);
-        ProcessData();
+        cityname = findViewById(R.id.cityname);
+        citynlat = findViewById(R.id.latitiude);
+        citylon = findViewById(R.id.logitude);
+       // citycode = findViewById(R.id.citycodelbl);
+        citypopulation = findViewById(R.id.population);
 
+getJsonData();
     }
-    public void ProcessData (){
+
+    public void getJsonData (){
         String JsonData = ReadJSONUtils.loadJSONFromAsset(this,"moscow_weather.json");
 
         try {
@@ -37,12 +42,11 @@ private TextView cityname,lati,longi,population;
             cityname.setText(cityObject.getString("name"));
 
             JSONObject cityCoordObject= cityObject.getJSONObject("coord");
+            citylon.setText("Longitude: "+cityCoordObject.getString("lon"));
+            citynlat.setText("Latitude: "+cityCoordObject.getString("lat"));
 
-            lati.setText("Latitude: "+cityCoordObject.getString("lat"));
-            longi.setText("Longitude: "+cityCoordObject.getString("lon"));
-
-          //  citycode.setText("Country: "+cityObject.getString("country"));
-            population.setText("population: "+cityObject.getString("population"));
+            citycode.setText("Country: "+cityObject.getString("country"));
+            citypopulation.setText("population: "+cityObject.getString("population"));
         }catch(Exception e){
             e.printStackTrace();
         }
